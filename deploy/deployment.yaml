@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: udagram-rev-proxy
+  name: udagram-rev-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: udagram-rev-proxy
+  template:
+    metadata:
+      labels:
+        app: udagram-rev-proxy
+    spec:
+      containers:
+        - image: fgil666/udacity-cd-udagram-rev-proxy
+          name: udagram-rev-proxy
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: '64Mi'
+              cpu: '250m'
+            limits:
+              memory: '1024Mi'
+              cpu: '500m'
+          ports:
+            - containerPort: 8080
+      restartPolicy: Always
